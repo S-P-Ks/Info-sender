@@ -16,12 +16,16 @@ import {
 } from "@material-ui/core";
 import Radio from "@material-ui/core/Radio";
 import { SUBMIT_FILTER_STROKE_TIME } from "@material-ui/data-grid";
+import { useDispatch } from "react-redux";
+import { createPosts } from "../action/posts";
 
 const Form = () => {
   const paperStyle = { padding: "30px 20px", width: 300, margin: "20px auto" };
   const headerStyle = { margin: 0 };
   const avatarStyle = { backgroundColor: "#1bbd7e" };
   const marginTop = { marginTop: 5 };
+
+  const dispatch = useDispatch();
 
   const [post, setpost] = useState({
     name: "",
@@ -30,6 +34,22 @@ const Form = () => {
     hobbies: [],
   });
 
+  const submit = (e) => {
+    e.preventDefault();
+    if (post.hobbies.length != 0) {
+      const hobby = post.hobbies.split(",");
+      setpost({ ...post, hobbies: hobby });
+      console.log(hobby);
+    }
+    dispatch(createPosts(post));
+    clear();
+  };
+
+  const clear = () => {
+    setpost({ name: "", email: "", phoneNumber: "", hobbies: [] });
+  };
+
+  console.log(post);
   return (
     <Grid>
       <Paper elevation={20} style={paperStyle}>
@@ -93,7 +113,7 @@ const Form = () => {
             variant="contained"
             color="primary"
             style={{ marginTop: "20px" }}
-            // onClick={submit()}
+            onClick={submit}
           >
             Submit
           </Button>
