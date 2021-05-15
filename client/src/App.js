@@ -4,6 +4,7 @@ import { DataGrid } from "@material-ui/core";
 import BasicTable from "./components/table";
 import { useSelector, useDispatch } from "react-redux";
 import { getPosts } from "./action/posts.js";
+import Form from "./components/form";
 
 function App() {
   const dispatch = useDispatch();
@@ -14,7 +15,12 @@ function App() {
 
   return (
     <div className="App">
-      <BasicTable />
+      <div style={{ width: "100%" }}>
+        <BasicTable />
+      </div>
+      <div style={{ width: "100%" }}>
+        <Form />
+      </div>
     </div>
   );
 }
