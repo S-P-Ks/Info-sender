@@ -30,11 +30,6 @@ const Form = () => {
     hobbies: [],
   });
 
-  const submit = (e) => {
-    e.preventDefault();
-    console.log(post.hobbies);
-  };
-
   return (
     <Grid>
       <Paper elevation={20} style={paperStyle}>
@@ -98,7 +93,7 @@ const Form = () => {
             variant="contained"
             color="primary"
             style={{ marginTop: "20px" }}
-            onClick={submit()}
+            // onClick={submit()}
           >
             Submit
           </Button>
