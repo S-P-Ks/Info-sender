@@ -6,6 +6,7 @@ import morgan from "morgan";
 import dotenv from "dotenv";
 
 import postRoutes from "./routes/posts.js";
+import sendMailRoutes from "./routes/sendMail.js";
 
 const app = express();
 dotenv.config();
@@ -13,7 +14,9 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors());
 app.use(morgan("dev"));
+
 app.use("/posts", postRoutes);
+app.use("/send", sendMailRoutes);
 
 const PORT = process.env.PORT || 5000;
 

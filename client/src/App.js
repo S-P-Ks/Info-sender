@@ -6,6 +6,8 @@ import { useSelector, useDispatch } from "react-redux";
 import { getPosts } from "./action/posts.js";
 import Form from "./components/form";
 
+import { BrowserRouter as Router, Route } from "react-router-dom";
+
 function App() {
   const dispatch = useDispatch();
 
@@ -14,14 +16,13 @@ function App() {
   }, [dispatch]);
 
   return (
-    <div className="App">
-      <div style={{ width: "100%" }}>
-        <BasicTable />
+    <Router>
+      <div className="App" style={{ width: "100vw" }}>
+        <div style={{ width: "100%" }}>
+          <BasicTable />
+        </div>
       </div>
-      <div style={{ width: "100%" }}>
-        <Form />
-      </div>
-    </div>
+    </Router>
   );
 }
 
