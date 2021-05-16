@@ -9,6 +9,7 @@ import Form from "./form";
 
 import { deletePosts } from "../action/posts";
 import UpdateForm from "./updateForm";
+import { sendPosts } from "../action/posts";
 
 const columns = [
   { field: "id", headerName: "ID", width: 150 },
@@ -43,6 +44,10 @@ export default function DataTable() {
     post.map((p) => dispatch(deletePosts(p)));
   };
 
+  const handelSubmit = () => {
+    dispatch(sendPosts(post));
+  };
+
   const dispatch = useDispatch();
 
   const [post, setPost] = useState([]);
@@ -56,7 +61,6 @@ export default function DataTable() {
   }));
 
   console.log(p);
-  console.log(post);
 
   return (
     <div
@@ -82,11 +86,7 @@ export default function DataTable() {
           Delete
         </Button>
 
-        <Button
-          variant="contained"
-          color="primary"
-          onClick={() => console.log(post)}
-        >
+        <Button variant="contained" color="primary" onClick={handelSubmit}>
           Send Info
         </Button>
 

@@ -7,7 +7,6 @@ import {
 } from "../constants/actionTypes";
 
 import * as api from "../api";
-import Mongoose from "mongoose";
 
 export const getPosts = () => async (dispatch) => {
   try {
@@ -54,6 +53,15 @@ export const updatePost = (id, post) => async (dispatch) => {
     const { data } = await api.updatePost(id, post);
     console.log(data);
     dispatch({ type: UPDATE, payload: data });
+  } catch (error) {
+    console.log(error.message);
+  }
+};
+
+export const sendPosts = (post) => async (dispatch) => {
+  console.log(post);
+  try {
+    await api.sendPost(post);
   } catch (error) {
     console.log(error.message);
   }

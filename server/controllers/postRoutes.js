@@ -66,36 +66,56 @@ export const updatePost = async (req, res) => {
 
 export const sendPosts = async (req, res) => {
   console.log(req.body);
-  // const transporter = nodemailer.createTransport({
-  //   service: "gmail",
-  //   auth: {
-  //     user: process.env.user,
-  //     pass: process.env.pass,
-  //   },
-  // });
+  const post = req.body;
+  console.log("==>");
+  console.log(post);
 
-  // console.log(transporter);
+  const Posts = [];
 
-  // var mailOptions = {
-  //   from: "10jMourinho@gmail.com",
-  //   to: "18it.shubhamkumbhare@adit.ac.in",
-  //   subject: "Just sending mails",
-  //   html: `<ol>
-  //       <li>Hello World</li>
-  //       <li>Hello World</li>
-  //       <li>Hello World</li>
-  //       <li>Hello World</li>
-  //       <li>Hello World</li>
-  //       </ol >`,
-  // };
+  let format = ``;
 
-  // transporter.sendMail(mailOptions, function (error, info) {
-  //   if (error) {
-  //     return { message: "Email Sent" };
-  //   } else {
-  //     console.log("Email sent: " + info.response);
-  //   }
-  // });
+  for (let i = 0; i < post.length; i++) {
+    const pos = await Info.findById(post[i]);
+    console.log(pos);
+    format += `
+    <li>
+      <div>${pos.name}</div><br>
+      <div>${pos.email}</div><br>
+      <div>${pos.phoneNumber}</div><br>
+      <div>${pos.hobbies}</div><br>
+    </li>
+    `;
+  }
+
+  console.log(format);
+  const transporter = nodemailer.createTransport({
+    service: "gmail",
+    auth: {
+      user: process.env.user,
+      pass: process.env.pass,
+    },
+  });
+
+  var mailOptions = {
+    from: "10jMourinho@gmail.com",
+    to: "hr.redpositive@gmail.com",
+    subject: "Just sending mails",
+    html: `
+      <ol>
+        ${format}
+      </ol>
+    `,
+  };
+  console.log("Sending Email");
+  transporter.sendMail(mailOptions, function (error, info) {
+    if (error) {
+      console.log("ERROR");
+      console.log(error);
+      return { message: "Error Happened" };
+    } else {
+      console.log("Email sent: " + info.response);
+    }
+  });
 };
 
 export default router;

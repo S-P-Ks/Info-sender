@@ -4,12 +4,12 @@ import cors from "cors";
 import mongoose from "mongoose";
 import morgan from "morgan";
 import dotenv from "dotenv";
+dotenv.config();
 
 import postRoutes from "./routes/posts.js";
 import sendMailRoutes from "./routes/sendMail.js";
 
 const app = express();
-dotenv.config();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors());
